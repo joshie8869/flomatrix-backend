@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FloMatrix Terminal — Institutional Orderflow Platform</title>
+
+    <!-- GLOBAL FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/terminal.css" />
+    <link rel="stylesheet" href="css/theme-dark.css" id="theme-css" />
+
+    <!-- LIGHTWEIGHT CHARTS -->
+    <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+
+    <!-- CORE MODULES -->
+    <script defer src="js/settings.js"></script>
+    <script defer src="js/terminal.js"></script>
+    <script defer src="js/chart-core.js"></script>
+    <script defer src="js/datafeed.js"></script>
+    <script defer src="js/indicators.js"></script>
+    <script defer src="js/order-entry.js"></script>
+</head>
+
+<body>
+
+<!-- ========================================================= -->
+<!--  TOP HYBRID TOOLBAR                                       -->
+<!-- ========================================================= -->
+
+<div id="fm-topbar">
+    <div id="fm-top-left">
+        <img src="img/logo.png" id="fm-logo" />
+        <div id="fm-brand">
+            <div class="title">FLO MATRIX</div>
+            <div class="subtitle">INSTITUTIONAL ORDERFLOW FOR EVERYDAY TRADERS</div>
+        </div>
+    </div>
+
+    <div id="fm-top-center">
+        <span id="fm-provider-label">Provider: <b id="fm-provider">—</b></span>
+        <span id="fm-live-badge" class="badge-live">● LIVE</span>
+        <span id="fm-status" class="status-disconnected">DISCONNECTED</span>
+    </div>
+
+    <div id="fm-top-right">
+        <span id="fm-username"></span>
+        <button id="fm-theme-toggle" class="fm-btn fm-btn-ghost">Theme</button>
+        <button id="fm-logout-btn" class="fm-btn fm-btn-ghost" onclick="fmAuth.logout()">Logout</button>
+    </div>
+</div>
+
+
+
+<!-- ========================================================= -->
+<!--  MAIN LAYOUT: LEFT TOOL PALETTE + CHART + RIGHT PANEL     -->
+<!-- ========================================================= -->
+
+<div id="fm-layout">
+
+    <!-- LEFT NEON TOOL PALETTE -->
+    <div id="fm-tools">
+
+        <button class="fm-tool-btn" data-tool="cursor" title="Cursor">
+            <span class="tool-icon">⤧</span>
+        </button>
+
+        <button class="fm-tool-btn" data-tool="crosshair" title="Crosshair">
+            <span class="tool-icon">✚</span>
+        </button>
+
+        <button class="fm-tool-btn" data-tool="measure" title="Measure">
+            <span class="tool-icon">📏</span>
+        </button>
+
+        <button class="fm-tool-btn" data-tool="draw" title="Drawing Tools">
+            <span class="tool-icon">✎</span>
+        </button>
+
+        <button class="fm-tool-btn" data-tool="dom" title="Depth of Market">
+            <span class="tool-icon">⚡</span>
+        </button>
+
+        <button class="fm-tool-btn" data-tool="zoom" title="Zoom/Pan">
+            <span class="tool-icon">🔎</span>
+        </button>
+
+        <button class="fm-tool-btn" data-tool="vp" title="Volume Profile">
+            <span class="tool-icon">▤</span>
+        </button>
+
+    </div>
+
+
+
+    <!-- MAIN CHART AREA -->
+    <div id="fm-chart-area">
+        <div id="fm-chart-header">
+            <span id="fm-chart-title">LIVE ORDERFLOW CANVAS</span>
+            <span id="fm-chart-subtitle">No symbol selected — choose a provider & symbol to start streaming.</span>
+            <span id="fm-chart-live-tag" class="tag-live">LIVE FEED</span>
+        </div>
+
+        <div id="fm-chart-container"></div>
+
+        <div id="fm-chart-footer">
+            <span id="fm-footer-status">DISCONNECTED</span>
+            <span id="fm-footer-tf">TF: —</span>
+            <span id="fm-footer-last">Last —</span>
+            <span id="fm-footer-delta">Δ% —</span>
+            <span id="fm-footer-hi">Hi —</span>
+            <span id="fm-footer-lo">Lo —</span>
+        </div>
+    </div>
+
+
+
+    <!-- RIGHT CONTROL PANEL -->
+    <div id="fm-right-panel">
+
+        <h3 class="panel-section-title">DATA PROVIDERS</h3>
+        <p class="panel-info">Kraken live now, dxFeed/Rithmic via backend — SaaS-ready wiring.</p>
+
+        <label class="panel-label">Provider</label>
+        <select id="provider-select" class="panel-select">
+            <option value="kraken">Kraken — Crypto (Free, Recommended)</option>
+            <option value="binance">Binance — Crypto (Free)</option>
+            <option value="dxfeed">dxFeed (Pro)</option>
+            <option value="rithmic">Rithmic (Institutional)</option>
+        </select>
+
+        <label class="panel-label">Interval</label>
+        <select id="interval-select" class="panel-select">
+            <option value="1m">1m</option>
+            <option value="5m">5m</option>
+            <option value="15m" selected>15m</option>
+            <option value="1h">1h</option>
+            <option value="4h">4h</option>
+        </select>
+
+        <label class="panel-label">Symbol</label>
+        <input id="symbol-input" value="XBT/USD" class="panel-input" />
+
+        <label class="panel-label">Connection</label>
+        <button id="connect-btn" class="fm-btn connect">CONNECT LIVE FEED</button>
+        <button id="disconnect-btn" class="fm-btn fm-btn-ghost">DISCONNECT</button>
+
+        <h3 class="panel-section-title">SAAS IDENTITY</h3>
+        <p class="panel-info">
+            Token stored at <code>localStorage["fm_auth_token"]</code>.  
+            For dxFeed/Rithmic, your backend will relay token as <code>?token=</code>.  
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

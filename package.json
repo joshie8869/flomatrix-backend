@@ -1,0 +1,25 @@
+{
+  "name": "flomatrix-platform",
+  "version": "1.0.0",
+  "description": "FloMatrix Institutional Orderflow Trading Engine",
+  "private": true,
+  "scripts": {
+    "dev": "webpack serve --config webpack.config.js --mode development",
+    "build": "webpack --config webpack.config.js --mode production",
+    "clean": "rm -rf dist .webpack-cache"
+  },
+  "dependencies": {
+    "eventemitter3": "^5.0.1",
+    "gl-matrix": "^3.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.1",
+    "copy-webpack-plugin": "^11.0.0",
+    "html-webpack-plugin": "^5.6.0",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  }
+}

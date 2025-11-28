@@ -1,0 +1,407 @@
+k<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FloMatrix Live Chart — Institutional Orderflow</title>
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- INLINE STYLES JUST FOR THIS PAGE -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #05060a;
+            color: #e4e4e4;
+            overflow: hidden;
+        }
+
+        /* TOP BRAND BAR */
+        #fm-top {
+            height: 60px;
+            width: 100%;
+            background: radial-gradient(circle at 0 0, #1b4130 0, #05060a 55%);
+            border-bottom: 1px solid rgba(74, 253, 120, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px;
+        }
+
+        #fm-top-left {
+            display: flex;
+            align-items: center;
+        }
+
+        #fm-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        #fm-brand-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #4afd78;
+            letter-spacing: 0.7px;
+        }
+
+        #fm-brand-sub {
+            font-size: 11px;
+            color: #b7c7da;
+            opacity: 0.7;
+        }
+
+        #fm-top-center {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+        }
+
+        #fm-live-pill {
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(74, 253, 120, 0.7);
+            background: rgba(74, 253, 120, 0.12);
+            color: #4afd78;
+            font-weight: 600;
+        }
+
+        #fm-provider-status {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        #connection-status {
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 99, 132, 0.6);
+            background: rgba(255, 99, 132, 0.12);
+            color: #ff6b81;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        #connection-status.fm-live {
+            border-color: rgba(74, 253, 120, 0.7);
+            background: rgba(74, 253, 120, 0.12);
+            color: #4afd78;
+        }
+
+        #fm-top-right {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* MAIN LAYOUT */
+        #fm-layout {
+            width: 100%;
+            height: calc(100vh - 60px);
+            display: grid;
+            grid-template-columns: auto 320px;
+        }
+
+        /* CHART SIDE */
+        #fm-chart-panel {
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at 0 0, #0d1820 0, #05060a 55%);
+        }
+
+        #fm-chart-header {
+            height: 46px;
+            padding: 10px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        #fm-chart-title {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        #fm-chart-subtitle {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        #fm-chart-live-tag {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(74, 253, 120, 0.6);
+            color: #4afd78;
+            background: rgba(74, 253, 120, 0.12);
+            margin-left: auto;
+        }
+
+        /* ACTUAL CHART ROOT */
+        #chart-root {
+            width: 100%;
+            height: calc(100% - 32px);
+        }
+
+        /* FOOTER */
+        #fm-chart-footer {
+            height: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0 18px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* RIGHT CONTROL PANEL */
+        #fm-right-panel {
+            background: #080b11;
+            border-left: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 18px 16px;
+            font-size: 13px;
+            overflow-y: auto;
+        }
+
+        #fm-right-panel h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .panel-text {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-bottom: 14px;
+            line-height: 1.4;
+        }
+
+        .panel-label {
+            display: block;
+            font-size: 11px;
+            opacity: 0.75;
+            margin-bottom: 4px;
+        }
+
+        .panel-input,
+        .panel-select {
+            width: 100%;
+            height: 34px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.04);
+            color: #e4e4e4;
+            padding: 0 10px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+
+        .panel-input:focus,
+        .panel-select:focus {
+            border-color: rgba(74, 253, 120, 0.7);
+        }
+
+        .fm-btn {
+            width: 100%;
+            height: 36px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            transition: 0.15s;
+        }
+
+        .fm-btn.connect {
+            background: #4afd78;
+            color: #000;
+        }
+
+        .fm-btn.connect:hover {
+            filter: brightness(1.1);
+        }
+
+        .fm-btn.ghost {
+            background: rgba(255, 255, 255, 0.05);
+            color: #e4e4e4;
+        }
+
+        .fm-btn.ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ORDER ENTRY PLACEHOLDER */
+        #order-entry-panel {
+            margin-top: 24px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        #order-entry-panel h4 {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        #order-entry-panel .row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        #order-entry-panel input,
+        #order-entry-panel select {
+            flex: 1;
+            height: 30px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.04);
+            color: #e4e4e4;
+            padding: 0 8px;
+            font-size: 12px;
+        }
+
+        #order-entry-panel button {
+            flex: 1;
+            height: 32px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.15s;
+        }
+
+        #order-buy {
+            background: #4afd78;
+            color: #000;
+        }
+
+        #order-sell {
+            background: #ff6b81;
+            color: #000;
+        }
+
+    </style>
+
+    <!-- JS MODULES (existing files) -->
+    <script src="js/settings.js" defer></script>
+    <script src="js/chart-core.js" defer></script>
+    <script src="js/indicators.js" defer></script>
+    <script src="js/order-entry.js" defer></script>
+    <script src="js/datafeed.js" defer></script>
+    <script src="js/terminal.js" defer></script>
+
+    <!-- Lightweight charts from CDN -->
+    <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+
+<body>
+    <!-- TOP BRAND BAR -->
+    <div id="fm-top">
+        <div id="fm-top-left">
+            <img src="img/logo.png" id="fm-logo" alt="FloMatrix logo" />
+            <div>
+                <div id="fm-brand-title">FloMatrix Live Chart</div>
+                <div id="fm-brand-sub">Institutional Orderflow for Everyday Traders</div>
+            </div>
+        </div>
+
+        <div id="fm-top-center">
+            <div id="fm-live-pill">● LIVE READY</div>
+            <div id="fm-provider-status">Provider: <span id="fm-provider-name">—</span></div>
+            <div id="connection-status">DISCONNECTED</div>
+        </div>
+
+        <div id="fm-top-right">
+            <span id="fm-user-label">SaaS Tenant: Local Dev</span>
+        </div>
+    </div>
+
+    <!-- MAIN LAYOUT -->
+    <div id="fm-layout">
+
+        <!-- CHART PANEL -->
+        <div id="fm-chart-panel">
+            <div id="fm-chart-header">
+                <span id="fm-chart-title">LIVE ORDERFLOW CANVAS</span>
+                <span id="fm-chart-subtitle">No symbol selected — choose a provider & symbol on the right to start streaming.</span>
+                <span id="fm-chart-live-tag">LIVE FEED</span>
+            </div>
+
+            <div id="chart-root"></div>
+
+            <div id="fm-chart-footer">
+                <span id="fm-footer-status">DISCONNECTED</span>
+                <span id="fm-footer-tf">TF: —</span>
+                <span id="fm-footer-last">Last: —</span>
+                <span id="fm-footer-delta">Δ% —</span>
+                <span id="fm-footer-hi">Hi —</span>
+                <span id="fm-footer-lo">Lo —</span>
+            </div>
+        </div>
+
+        <!-- RIGHT CONTROLS -->
+        <div id="fm-right-panel">
+            <h3>DATA PROVIDERS</h3>
+            <p class="panel-text">
+                Kraken live now, dxFeed/Rithmic via your backend — SaaS-ready wiring.
+            </p>
+
+            <label class="panel-label">Provider</label>
+            <select id="provider-select" class="panel-select">
+                <option value="kraken">Kraken — Crypto (Free, Recommended)</option>
+                <option value="binance">Binance — Crypto (Free)</option>
+                <option value="dxfeed">dxFeed (Pro)</option>
+                <option value="rithmic">Rithmic (Institutional)</option>
+            </select>
+
+            <label class="panel-label">Interval</label>
+            <select id="interval-select" class="panel-select">
+                <option value="1m">1m</option>
+                <option value="5m">5m</option>
+                <option value="15m" selected>15m</option>
+                <option value="1h">1h</option>
+                <option value="4h">4h</option>
+            </select>
+
+            <label class="panel-label">Symbol</label>
+            <input id="symbol-input" class="panel-input" value="XBT/USD" />
+
+            <label class="panel-label">Connection</label>
+            <button id="connect-btn" class="fm-btn connect">CONNECT LIVE FEED</button>
+            <button id="disconnect-btn" class="fm-btn ghost">DISCONNECT</button>
+
+            <!-- ORDER ENTRY PLACEHOLDER (wired to order-entry.js) -->
+            <div id="order-entry-panel">
+                <h4>Order Entry (placeholder)</h4>
+                <div class="row">
+                    <input id="order-qty" type="number" placeholder="Qty" />
+                    <input id="order-price" type="number" placeholder="Price" />
+                </div>
+                <div class="row">
+                    <select id="order-type">
+                        <option value="limit">Limit</option>
+                        <option value="market">Market</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <button id="order-buy">BUY</button>
+                    <button id="order-sell">SELL</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,193 @@
+/* ====================================================================
+   FloMatrix — NEON THEME
+   High-contrast, glowing borders, louder accents
+   ==================================================================== */
+
+:root {
+    --fm-bg: #02030a;
+    --fm-bg-elevated: #050616;
+    --fm-bg-panel: #050919;
+    --fm-bg-panel-soft: #080d22;
+
+    --fm-border-subtle: rgba(0, 255, 170, 0.18);
+    --fm-border-strong: rgba(0, 225, 255, 0.5);
+
+    --fm-accent: #48ff9b;
+    --fm-accent-soft: rgba(72, 255, 155, 0.22);
+    --fm-accent-strong: #a3ffb5;
+    --fm-accent-alt: #00e0ff;
+
+    --fm-text: #f9faff;
+    --fm-text-soft: #a6b1ff;
+    --fm-text-mute: #7378a3;
+    --fm-text-danger: #ff5b7c;
+    --fm-text-warning: #ffd86b;
+
+    --fm-danger: #ff5b7c;
+    --fm-danger-soft: rgba(255, 91, 124, 0.18);
+
+    --fm-shadow-soft: 0 0 40px rgba(0, 255, 163, 0.4), 0 0 80px rgba(0, 224, 255, 0.45);
+    --fm-radius-lg: 20px;
+    --fm-radius-pill: 999px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background:
+        radial-gradient(circle at 10% -10%, #18ffd6 0, transparent 55%),
+        radial-gradient(circle at 90% 110%, #0057ff 0, transparent 55%),
+        #02030a;
+    color: var(--fm-text);
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+#app-root,
+.fm-shell {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Panels */
+
+.fm-panel {
+    background:
+        radial-gradient(circle at 0 0, rgba(72, 255, 155, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(0, 224, 255, 0.22), transparent 55%),
+        rgba(2, 4, 18, 0.95);
+    border-radius: var(--fm-radius-lg);
+    border: 1px solid rgba(0, 255, 195, 0.45);
+    box-shadow: var(--fm-shadow-soft);
+    backdrop-filter: blur(24px);
+}
+
+/* Header strip */
+
+.fm-header {
+    background:
+        linear-gradient(120deg, rgba(72, 255, 155, 0.5), rgba(0, 224, 255, 0.7)),
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 55%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.fm-logo-mark {
+    background:
+        radial-gradient(circle at 10% 0, #48ff9b 0, transparent 55%),
+        radial-gradient(circle at 100% 120%, #00e0ff 0, transparent 55%),
+        #02030a;
+    box-shadow:
+        0 0 22px rgba(0, 255, 163, 0.9),
+        0 0 45px rgba(0, 224, 255, 0.85);
+}
+
+/* Buttons */
+
+.fm-btn {
+    border-radius: var(--fm-radius-pill);
+    border: 1px solid rgba(153, 249, 255, 0.4);
+    background: radial-gradient(circle at 0 0, rgba(0, 255, 176, 0.16), transparent 60%),
+                rgba(3, 6, 30, 0.96);
+    color: var(--fm-text-soft);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    box-shadow: 0 0 16px rgba(0, 221, 255, 0.35);
+    cursor: pointer;
+    transition: all 140ms ease-out;
+}
+
+.fm-btn:hover {
+    transform: translateY(-1px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.85);
+    color: #ffffff;
+    box-shadow: 0 0 24px rgba(0, 255, 176, 0.9);
+}
+
+.fm-btn-primary {
+    background: radial-gradient(circle at 0 0, #48ff9b 0, transparent 60%),
+                linear-gradient(120deg, #48ff9b, #00e0ff);
+    color: #02030a;
+    font-weight: 700;
+}
+
+/* Inputs */
+
+.fm-input,
+.fm-select {
+    border-radius: 999px;
+    border: 1px solid rgba(93, 249, 255, 0.55);
+    background: radial-gradient(circle at top, rgba(72, 255, 155, 0.22), transparent 60%),
+                rgba(3, 6, 22, 0.96);
+    color: var(--fm-text);
+    font-size: 12px;
+    padding: 5px 12px;
+}
+
+.fm-input::placeholder {
+    color: var(--fm-text-mute);
+}
+
+/* Metrics */
+
+.fm-metric {
+    background:
+        linear-gradient(145deg, rgba(72, 255, 155, 0.22), rgba(0, 224, 255, 0.22)),
+        rgba(2, 5, 20, 0.9);
+    border-radius: 14px;
+    border: 1px solid rgba(154, 255, 222, 0.65);
+    box-shadow: 0 0 18px rgba(0, 224, 255, 0.5);
+}
+
+/* Connection status */
+
+#connection-status,
+.fm-badge-live {
+    background: radial-gradient(circle at 0 0, rgba(72, 255, 155, 0.4), transparent 60%),
+                rgba(3, 6, 22, 0.95);
+    border-radius: 999px;
+    border: 1px solid rgba(0, 255, 201, 0.8);
+    color: var(--fm-text-soft);
+}
+
+.fm-live {
+    color: #48ff9b !important;
+    box-shadow: 0 0 22px rgba(72, 255, 155, 0.9);
+}
+
+/* Order Entry */
+
+#order-entry-panel {
+    background:
+        radial-gradient(circle at 0 0, rgba(0, 224, 255, 0.3), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(72, 255, 155, 0.22), transparent 60%),
+        #050616;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 201, 0.75);
+    box-shadow:
+        0 0 25px rgba(0, 255, 201, 0.8),
+        0 0 45px rgba(0, 113, 255, 0.7);
+}
+
+/* Canvases */
+
+#dom-canvas,
+#heatmap-canvas,
+#footprint-canvas,
+#cluster-canvas,
+#vp-canvas {
+    background:
+        radial-gradient(circle at 0 0, rgba(0, 255, 195, 0.24), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(0, 121, 255, 0.18), transparent 60%),
+        #02030c;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 232, 255, 0.38);
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #48ff9b, #00e0ff);
+}
+

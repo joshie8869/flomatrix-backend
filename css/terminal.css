@@ -1,0 +1,338 @@
+/* ============================================================
+   FLOMATRIX TERMINAL — MASTER STYLESHEET
+   Hybrid Institutional + FloMatrix Neon
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, sans-serif;
+}
+
+body {
+    background: #05060A;
+    color: #E4E4E4;
+    overflow: hidden;
+}
+
+/* ============================================================
+    TOP HYBRID TOOLBAR
+   ============================================================ */
+
+#fm-topbar {
+    width: 100%;
+    height: 62px;
+    background: rgba(10, 12, 18, 0.65);
+    border-bottom: 1px solid rgba(80, 255, 150, 0.12);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    justify-content: space-between;
+}
+
+/* LEFT SECTION */
+
+#fm-top-left {
+    display: flex;
+    align-items: center;
+}
+
+#fm-logo {
+    width: 42px;
+    height: 42px;
+    margin-right: 12px;
+    user-select: none;
+}
+
+#fm-brand .title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #4AFD78;
+    letter-spacing: 0.7px;
+}
+
+#fm-brand .subtitle {
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: -2px;
+}
+
+/* CENTER SECTION */
+
+#fm-top-center {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+#fm-provider-label {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.badge-live {
+    background: rgba(80, 255, 150, 0.12);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #4AFD78;
+}
+
+.status-disconnected {
+    color: #ff5c5c;
+    font-weight: 600;
+}
+
+.status-live {
+    color: #4AFD78;
+    font-weight: 600;
+}
+
+/* RIGHT SECTION */
+
+#fm-top-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#fm-username {
+    font-size: 14px;
+    font-weight: 500;
+    color: #E3E3E3;
+    margin-right: 4px;
+}
+
+/* Buttons */
+
+.fm-btn {
+    border: none;
+    padding: 6px 14px;
+    background: #4AFD78;
+    color: #000;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.fm-btn:hover {
+    filter: brightness(1.1);
+}
+
+.fm-btn-ghost {
+    background: rgba(255, 255, 255, 0.06);
+    color: #E3E3E3;
+}
+
+/* ============================================================
+    MAIN LAYOUT
+   ============================================================ */
+
+#fm-layout {
+    display: grid;
+    grid-template-columns: 62px auto 340px;
+    width: 100%;
+    height: calc(100vh - 62px);
+}
+
+/* ============================================================
+    LEFT TOOL PALETTE — NEON CUSTOM
+   ============================================================ */
+
+#fm-tools {
+    width: 62px;
+    background: #07090F;
+    border-right: 1px solid rgba(80, 255, 150, 0.1);
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.fm-tool-btn {
+    width: 42px;
+    height: 42px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(80,255,150,0.15);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fm-tool-btn:hover {
+    background: rgba(80,255,150,0.18);
+    transform: translateY(-2px);
+}
+
+.fm-tool-btn.active {
+    background: rgba(80,255,150,0.25);
+    border-color: #4AFD78;
+    box-shadow: 0 0 12px rgba(74,253,120,0.4);
+}
+
+.tool-icon {
+    color: #4AFD78;
+    font-size: 20px;
+}
+
+/* ============================================================
+    CHART AREA
+   ============================================================ */
+
+#fm-chart-area {
+    background: linear-gradient(180deg, #0A0D12 0%, #05060A 100%);
+    display: flex;
+    flex-direction: column;
+}
+
+#fm-chart-header {
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(80, 255, 150, 0.08);
+}
+
+#fm-chart-title {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#fm-chart-subtitle {
+    font-size: 12px;
+    opacity: 0.65;
+    margin-left: 4px;
+}
+
+.tag-live {
+    background: rgba(80,255,150,0.12);
+    padding: 3px 8px;
+    margin-left: 10px;
+    border-radius: 6px;
+    color: #4AFD78;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+#fm-chart-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* FOOTER */
+
+#fm-chart-footer {
+    height: 30px;
+    padding: 0 18px;
+    border-top: 1px solid rgba(80,255,150,0.08);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* ============================================================
+    RIGHT PANEL
+   ============================================================ */
+
+#fm-right-panel {
+    background: #0B0D12;
+    border-left: 1px solid rgba(80,255,150,0.1);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.panel-section-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.panel-info {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-bottom: 20px;
+}
+
+.panel-label {
+    font-size: 12px;
+    opacity: 0.75;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.panel-select,
+.panel-input {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(80,255,150,0.15);
+    height: 36px;
+    border-radius: 8px;
+    color: #E3E3E3;
+    padding: 0 10px;
+    margin-bottom: 14px;
+}
+
+.connect {
+    background: #4AFD78 !important;
+    color: #000 !important;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* ============================================================
+    SCROLLBAR — CUSTOM
+   ============================================================ */
+
+#fm-right-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+#fm-right-panel::-webkit-scrollbar-thumb {
+    background: rgba(80,255,150,0.2);
+    border-radius: 4px;
+}
+
+/* ============================================================
+    AUTH LOGIN SCREEN (if used)
+   ============================================================ */
+
+#fm-login-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background: #05060A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#fm-login-box {
+    width: 380px;
+    padding: 30px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    border: 1px solid rgba(80,255,150,0.15);
+}
+
+#fm-login-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#fm-login-box input {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid rgba(80,255,150,0.15);
+    margin-bottom: 16px;
+    padding: 0 10px;
+}
+

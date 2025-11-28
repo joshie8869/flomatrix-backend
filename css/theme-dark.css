@@ -1,0 +1,257 @@
+/* ====================================================================
+   FloMatrix — DARK THEME
+   Deep matte background, subtle contrast, neon-green accents
+   ==================================================================== */
+
+:root {
+    --fm-bg: #05060a;
+    --fm-bg-elevated: #0a0c14;
+    --fm-bg-panel: #10121f;
+    --fm-bg-panel-soft: #171a29;
+
+    --fm-border-subtle: rgba(255, 255, 255, 0.04);
+    --fm-border-strong: rgba(255, 255, 255, 0.12);
+
+    --fm-accent: #41ff7a;
+    --fm-accent-soft: rgba(65, 255, 122, 0.18);
+    --fm-accent-strong: rgba(65, 255, 122, 0.9);
+    --fm-accent-alt: #00e1ff;
+
+    --fm-text: #f5f5f8;
+    --fm-text-soft: #9ca3c7;
+    --fm-text-mute: #6b708e;
+    --fm-text-danger: #ff4d6a;
+    --fm-text-warning: #ffcc66;
+
+    --fm-danger: #ff4d6a;
+    --fm-danger-soft: rgba(255, 77, 106, 0.16);
+
+    --fm-shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.7);
+    --fm-radius-lg: 18px;
+    --fm-radius-pill: 999px;
+}
+
+/* Base layout */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: radial-gradient(circle at top left, #101426 0, #05060a 38%, #02030a 100%);
+    color: var(--fm-text);
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+#app-root,
+.fm-shell {
+    width: 100%;
+    min-height: 100vh;
+    background: transparent;
+}
+
+/* Panels */
+
+.fm-panel {
+    background: linear-gradient(145deg, var(--fm-bg-panel) 0, var(--fm-bg-panel-soft) 100%);
+    border-radius: var(--fm-radius-lg);
+    border: 1px solid var(--fm-border-subtle);
+    box-shadow: var(--fm-shadow-soft);
+    backdrop-filter: blur(20px);
+}
+
+.fm-panel-header {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--fm-text-soft);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.fm-panel-body {
+    padding: 10px;
+}
+
+/* Header / brand strip */
+
+.fm-header {
+    background: radial-gradient(circle at top left, rgba(65, 255, 122, 0.11), transparent 55%),
+                linear-gradient(135deg, rgba(0, 225, 255, 0.14), transparent 45%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.fm-logo-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 20% 0%, #41ff7a 0, transparent 55%),
+                radial-gradient(circle at 80% 100%, #00e1ff 0, transparent 55%),
+                #05060a;
+    box-shadow: 0 0 0 1px rgba(65, 255, 122, 0.25),
+                0 18px 50px rgba(0, 0, 0, 0.9);
+}
+
+/* Typography helpers */
+
+.fm-text-soft {
+    color: var(--fm-text-soft);
+}
+
+.fm-text-mute {
+    color: var(--fm-text-mute);
+}
+
+/* Buttons */
+
+.fm-btn {
+    border-radius: var(--fm-radius-pill);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 6px 14px;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: rgba(9, 12, 21, 0.85);
+    color: var(--fm-text-soft);
+    cursor: pointer;
+    transition: all 140ms ease-out;
+}
+
+.fm-btn:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    color: var(--fm-text);
+    background: rgba(16, 22, 42, 0.95);
+    transform: translateY(-1px);
+}
+
+.fm-btn-primary {
+    background: radial-gradient(circle at 20% 0%, rgba(65, 255, 122, 0.4), transparent 55%),
+                linear-gradient(120deg, #4effa1, #00e1ff);
+    border-color: rgba(65, 255, 122, 0.65);
+    color: #020309;
+    font-weight: 600;
+    box-shadow: 0 0 18px rgba(65, 255, 122, 0.55);
+}
+
+.fm-btn-primary:hover {
+    filter: brightness(1.07);
+    box-shadow: 0 0 26px rgba(65, 255, 122, 0.8);
+}
+
+.fm-btn-ghost {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.09);
+}
+
+/* Inputs / selects */
+
+.fm-input,
+.fm-select {
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: radial-gradient(circle at top, rgba(255, 255, 255, 0.05), transparent 55%),
+                rgba(6, 8, 15, 0.96);
+    color: var(--fm-text);
+    font-size: 12px;
+    padding: 4px 12px;
+    outline: none;
+    transition: border-color 120ms ease-out, box-shadow 120ms ease-out, background 120ms ease-out;
+}
+
+.fm-input::placeholder {
+    color: var(--fm-text-mute);
+}
+
+.fm-input:focus,
+.fm-select:focus {
+    border-color: rgba(65, 255, 122, 0.9);
+    box-shadow: 0 0 0 1px rgba(65, 255, 122, 0.6);
+}
+
+/* Metrics strip */
+
+.fm-metric {
+    border-radius: 12px;
+    background: radial-gradient(circle at top left, rgba(65, 255, 122, 0.14), transparent 60%),
+                rgba(10, 14, 25, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 6px 10px;
+    font-size: 11px;
+    color: var(--fm-text-soft);
+}
+
+.fm-metric-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fm-text);
+}
+
+/* Connection status badge */
+
+#connection-status,
+.fm-badge-live {
+    font-size: 11px;
+    border-radius: 999px;
+    padding: 4px 10px;
+    background: rgba(17, 22, 35, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--fm-text-soft);
+}
+
+.fm-live {
+    color: var(--fm-accent-strong) !important;
+    border-color: rgba(65, 255, 122, 0.9) !important;
+    box-shadow: 0 0 14px rgba(65, 255, 122, 0.55);
+}
+
+/* Order entry panel */
+
+#order-entry-panel {
+    background: radial-gradient(circle at top right, rgba(0, 225, 255, 0.18), transparent 55%),
+                linear-gradient(145deg, #080a12, #141828);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.85);
+}
+
+/* Scrollbars (WebKit) */
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(4, 6, 12, 0.9);
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(65, 255, 122, 0.65), rgba(0, 225, 255, 0.75));
+    border-radius: 999px;
+}
+
+/* Canvas backgrounds */
+
+#dom-canvas,
+#heatmap-canvas,
+#footprint-canvas,
+#cluster-canvas,
+#vp-canvas {
+    background: radial-gradient(circle at top left, #10131f 0, #050711 42%, #020308 100%);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+

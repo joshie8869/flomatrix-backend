@@ -1,0 +1,166 @@
+/* ====================================================================
+   FloMatrix — LIGHT THEME
+   Minimal, high-contrast on white, subtle green/blue accents
+   ==================================================================== */
+
+:root {
+    --fm-bg: #f4f5fb;
+    --fm-bg-elevated: #ffffff;
+    --fm-bg-panel: #ffffff;
+    --fm-bg-panel-soft: #f3f4fb;
+
+    --fm-border-subtle: rgba(15, 23, 42, 0.08);
+    --fm-border-strong: rgba(15, 23, 42, 0.18);
+
+    --fm-accent: #16a34a;
+    --fm-accent-soft: rgba(22, 163, 74, 0.12);
+    --fm-accent-strong: #0f9f53;
+    --fm-accent-alt: #2563eb;
+
+    --fm-text: #0f172a;
+    --fm-text-soft: #4b5563;
+    --fm-text-mute: #9ca3af;
+    --fm-text-danger: #b91c1c;
+    --fm-text-warning: #b45309;
+
+    --fm-danger: #dc2626;
+    --fm-danger-soft: rgba(220, 38, 38, 0.12);
+
+    --fm-shadow-soft: 0 12px 35px rgba(15, 23, 42, 0.12);
+    --fm-radius-lg: 16px;
+    --fm-radius-pill: 999px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: radial-gradient(circle at top, #e5f0ff 0, #f4f5fb 45%, #eef2ff 100%);
+    color: var(--fm-text);
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+#app-root,
+.fm-shell {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Panels */
+
+.fm-panel {
+    background: var(--fm-bg-panel);
+    border-radius: var(--fm-radius-lg);
+    border: 1px solid var(--fm-border-subtle);
+    box-shadow: var(--fm-shadow-soft);
+}
+
+/* Header */
+
+.fm-header {
+    background: linear-gradient(135deg, #e2f3ff, #e8fff2);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.fm-logo-mark {
+    background:
+        radial-gradient(circle at 0 0, #16a34a 0, transparent 70%),
+        radial-gradient(circle at 100% 100%, #2563eb 0, transparent 70%),
+        #ffffff;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.16);
+}
+
+/* Buttons */
+
+.fm-btn {
+    border-radius: var(--fm-radius-pill);
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    background: #ffffff;
+    color: var(--fm-text-soft);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 120ms ease-out;
+}
+
+.fm-btn:hover {
+    background: #f3f4ff;
+    border-color: rgba(37, 99, 235, 0.6);
+    color: #111827;
+    transform: translateY(-1px);
+}
+
+.fm-btn-primary {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    border-color: rgba(16, 185, 129, 0.9);
+    color: white;
+    font-weight: 600;
+}
+
+/* Inputs */
+
+.fm-input,
+.fm-select {
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.9);
+    background: #ffffff;
+    color: var(--fm-text);
+    padding: 5px 12px;
+    font-size: 12px;
+}
+
+.fm-input::placeholder {
+    color: var(--fm-text-mute);
+}
+
+/* Metrics */
+
+.fm-metric {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+/* Connection status */
+
+#connection-status,
+.fm-badge-live {
+    background: #e5f6ff;
+    border-radius: 999px;
+    border: 1px solid rgba(37, 99, 235, 0.4);
+    color: #1f2933;
+}
+
+.fm-live {
+    color: #16a34a !important;
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.7);
+}
+
+/* Order panel */
+
+#order-entry-panel {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.20);
+}
+
+/* Canvases */
+
+#dom-canvas,
+#heatmap-canvas,
+#footprint-canvas,
+#cluster-canvas,
+#vp-canvas {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.55);
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #16a34a, #2563eb);
+}

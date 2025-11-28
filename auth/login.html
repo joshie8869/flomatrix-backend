@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>FloMatrix — Login</title>
+
+    <link rel="stylesheet" href="../css/theme-dark.css" id="theme-css" />
+    <link rel="stylesheet" href="../css/auth-base.css" />
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-panel">
+        <div class="auth-logo">FloMatrix</div>
+
+        <h2 class="auth-title">Sign In</h2>
+
+        <p class="auth-small">
+            Demo login available:<br/>
+            <strong>demo@flomatrix.trade</strong> / <strong>demo123</strong>
+        </p>
+
+        <input id="email" class="auth-input" type="email" placeholder="Email" />
+        <input id="password" class="auth-input" type="password" placeholder="Password" />
+
+        <button id="login-btn" class="auth-btn-primary">Login</button>
+
+        <div class="auth-small">
+            Need an account?
+            <a href="register.html">Create one</a>
+        </div>
+
+        <div id="auth-msg" class="auth-msg"></div>
+    </div>
+
+</div>
+
+<script src="../js/auth.js"></script>
+
+<script>
+(function() {
+
+    const emailEl = document.getElementById("email");
+    const pwdEl   = document.getElementById("password");
+    const msgEl   = document.getElementById("auth-msg");
+    const btn     = document.getElementById("login-btn");
+
+    // if already logged in, bounce to chart
+    if (window.fmAuth && fmAuth.isLoggedIn()) {
+        window.location.href = "/chart.html";
+        return;
+    }
+
+    // prefill demo creds for convenience
+    emailEl.value = "demo@flomatrix.trade";
+    pwdEl.value   = "demo123";
+
+    async function doLogin() {
+        msgEl.innerText = "";
+        btn.disabled = true;
+        btn.innerText = "Logging in…";
+
+        try {
+            const email = emailEl.value;
+            const pwd   = pwdEl.value;
+
+            await fmAuth.login(email, pwd);
+
+            // redirect to ?next= if present, otherwise chart.html
+            const params = new URLSearchParams(window.location.search);
+            const next = params.get("next") || "/chart.html";
+            window.location.href = next;
+
+        } catch (e) {
+            msgEl.innerText = e.message || "Login failed.";
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "Login";
+        }
+    }
+
+    btn.addEventListener("click", doLogin);
+
+    pwdEl.addEventListener("keyup", (ev) => {
+        if (ev.key === "Enter") {
+            doLogin();
+        }
+    });
+
+})();
+</script>
+
+</body>
+</html>
